@@ -1,8 +1,11 @@
-    return (
+import React from 'react' 
+export default function
+Card({username, price})   {
+   return (
         <div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96 mr-2">
         <div class="relative p-2.5 h-96 overflow-hidden rounded-xl bg-clip-border">
             <img
-                src="https://unsplash.com"
+                src="https://www.robotlab.com/hubfs/coding.jpg"
                 alt="card-image"
                 class="h-full w-full object-cover rounded-md"
             />
@@ -25,3 +28,4 @@
         </div>
     </div>
     )
+}
