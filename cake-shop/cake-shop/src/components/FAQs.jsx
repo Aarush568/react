@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { slugify } from '../utils/slug';
+import { useScrollToHash } from '../utils/useScrollToHash';
 
-const faqs = [
+export const faqs = [
   { title: 'Safe Delivery?', badge: 'Logistics', price: 'Chilled Truck', color: '#e0f2fe', mainText: 'We dispatch orders via climate-regulated transport vehicles across a 25-mile local radius.' },
   { title: 'Order Deadlines?', badge: 'Timelines', price: '48h Notice', color: '#fef9c3', mainText: 'Standard items need 48 hours notice. Custom tiered wedding commissions need a 2-week window.' },
   { title: 'Allergen Controls?', badge: 'Dietary', price: 'Nut/Gluten Free', color: '#d1fae5', mainText: 'We produce vegan, dairy-free, and nut-free styles. Advise our desk about extreme allergy profiles.' },
@@ -10,7 +13,31 @@ const faqs = [
 ];
 
 export default function FAQs() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndexes, setOpenIndexes] = useState(new Set());
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) return;
+    const slug = location.hash.slice(1);
+    const idx = faqs.findIndex(f => slugify(f.title) === slug);
+    if (idx !== -1) {
+      setOpenIndexes(prev => new Set(prev).add(idx));
+    }
+  }, [location.hash]);
+
+  useScrollToHash();
+
+  const toggle = (i) => {
+    setOpenIndexes(prev => {
+      const next = new Set(prev);
+      if (next.has(i)) {
+        next.delete(i);
+      } else {
+        next.add(i);
+      }
+      return next;
+    });
+  };
 
   return (
     <div>
@@ -34,9 +61,9 @@ export default function FAQs() {
       <div className="max-w-3xl mx-auto px-6 py-12">
         <div className="divide-y divide-stone-200">
           {faqs.map((faq, i) => (
-            <div key={i}>
+            <div key={i} id={slugify(faq.title)} className="scroll-mt-24">
               <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                onClick={() => toggle(i)}
                 className="w-full py-6 flex items-center justify-between text-left gap-4 group"
               >
                 <div className="flex flex-wrap items-center gap-3">
@@ -48,11 +75,11 @@ export default function FAQs() {
                   </span>
                 </div>
                 <span className="text-stone-400 text-2xl font-light shrink-0 leading-none">
-                  {openIndex === i ? '−' : '+'}
+                  {openIndexes.has(i) ? '−' : '+'}
                 </span>
               </button>
 
-              {openIndex === i && (
+              {openIndexes.has(i) && (
                 <div className="pb-7 pl-0">
                   <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-100 inline-block mb-3">
                     {faq.price}

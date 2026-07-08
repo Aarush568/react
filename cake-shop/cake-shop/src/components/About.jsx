@@ -1,6 +1,8 @@
 import React from 'react';
+import { slugify } from '../utils/slug';
+import { useScrollToHash } from '../utils/useScrollToHash';
 
-const items = [
+export const aboutItems = [
   { title: 'Our Origins', badge: 'Timeline', price: 'Est. 2015', color: '#fef3c7', mainText: 'Started as an intimate family kitchen and blossomed into the region\'s premium custom dessert house.' },
   { title: 'Organic Harvest', badge: 'Sourcing', price: '100% Pure', color: '#d1fae5', mainText: 'We gather whole flours, sweet creams, and seasonal fruit sets from direct partner farmers.' },
   { title: 'The Pastry Team', badge: 'Artisans', price: '25+ Years', color: '#ede9fe', mainText: 'Our baking leaders bring over twenty-five combined years of classical European pastry decoration.' },
@@ -10,6 +12,8 @@ const items = [
 ];
 
 export default function About() {
+  useScrollToHash();
+
   return (
     <div>
       {/* Page hero */}
@@ -31,8 +35,8 @@ export default function About() {
       {/* Content rows */}
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="divide-y divide-stone-100">
-          {items.map((item, i) => (
-            <div key={i} className="py-10 flex gap-8 items-start">
+          {aboutItems.map((item, i) => (
+            <div key={i} id={slugify(item.title)} className="py-10 flex gap-8 items-start scroll-mt-24">
               <div
                 className="shrink-0 w-14 h-14 rounded-xl flex items-center justify-center text-2xl"
                 style={{ backgroundColor: item.color }}

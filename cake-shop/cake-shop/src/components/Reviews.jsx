@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { slugify } from '../utils/slug';
+import { useScrollToHash } from '../utils/useScrollToHash';
 
-const reviews = [
+export const reviews = [
   { title: 'Sarah M.', badge: '★★★★★', price: 'Wedding', color: '#fef3c7', mainText: 'The custom 4-tier cake was a breathtaking structural marvel. Guests were completely amazed.' },
   { title: 'James L.', badge: '★★★★★', price: 'Birthday', color: '#fce4e4', mainText: 'The dark chocolate displays magnificent depth without aggressive sugar weight. Exceptional.' },
   { title: 'Elena R.', badge: '★★★★★', price: 'Allergy Safe', color: '#d1fae5', mainText: 'They managed my severe gluten allergy with absolute cross-contamination protection. Deliciously safe.' },
@@ -12,6 +14,8 @@ const reviews = [
 export default function Reviews() {
   const [sortByPrice, setSortByPrice] = useState(false);
   const shown = sortByPrice ? [...reviews].sort((a, b) => a.price.localeCompare(b.price)) : reviews;
+
+  useScrollToHash();
 
   return (
     <div>
@@ -50,7 +54,7 @@ export default function Reviews() {
 
         <div className="divide-y divide-stone-100">
           {shown.map((review, i) => (
-            <div key={i} className="py-8 flex gap-6 items-start">
+            <div key={i} id={slugify(review.title)} className="py-8 flex gap-6 items-start scroll-mt-24">
               <div
                 className="shrink-0 w-12 h-12 rounded-full flex items-center justify-center font-bold text-stone-800 text-lg"
                 style={{ backgroundColor: review.color }}

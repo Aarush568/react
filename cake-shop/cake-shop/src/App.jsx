@@ -6,6 +6,7 @@ import Reviews from './components/Reviews';
 import FAQs from './components/FAQs';
 import Contact from './components/Contact';
 import { LikedContext } from './context/LikedContext';
+import Footer from './components/Footer';
 
 const navItems = [
   { path: '/', label: 'Home' },
@@ -103,6 +104,8 @@ function Layout() {
         <main>
           <Outlet />
         </main>
+
+        <Footer />
 
       </div>
     </LikedContext.Provider>

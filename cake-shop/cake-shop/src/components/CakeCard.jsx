@@ -1,13 +1,14 @@
 import React from 'react';
 import { useLiked } from '../context/LikedContext';
 
-export default function CakeCard({ title, badge, mainText, price, color, actionLabel }) {
+export default function CakeCard({ id, title, badge, mainText, price, color, image, actionLabel }) {
   const { toggleLiked, isLiked } = useLiked();
   const liked = isLiked(title);
 
   return (
     <div
-      className={`rounded-xl border-2 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden h-full ${
+      id={id}
+      className={`rounded-xl border-2 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden h-full scroll-mt-24 ${
         liked ? 'border-teal-400 bg-teal-50' : 'border-stone-200 bg-white'
       }`}
     >
@@ -16,7 +17,11 @@ export default function CakeCard({ title, badge, mainText, price, color, actionL
         className="w-full h-36 relative shrink-0 flex items-center justify-center"
         style={{ backgroundColor: color || '#f5e6d3' }}
       >
-        <span className="text-4xl select-none">🎂</span>
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
         <span className="absolute top-2 left-2 text-[9px] uppercase font-bold tracking-widest px-2 py-0.5 bg-white/90 rounded text-amber-900 border border-stone-200">
           {badge}
         </span>

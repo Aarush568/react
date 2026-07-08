@@ -1,6 +1,8 @@
 import React from 'react';
+import { slugify } from '../utils/slug';
+import { useScrollToHash } from '../utils/useScrollToHash';
 
-const contacts = [
+export const contacts = [
   { title: '(555) 839-2001', badge: 'Phone', price: 'Hotline', color: '#dbeafe', icon: '📞', mainText: 'Call our concierge desk for real-time order tracking, menu adjustments, and walk-in availability.' },
   { title: 'bake@maisonsucre.com', badge: 'Email', price: 'Inquiries', color: '#fce7f3', icon: '✉️', mainText: 'Submit image boards, guest sizes, or venue guidelines for custom catering quotes.' },
   { title: '742 Baker Avenue', badge: 'Boutique', price: 'Sweetwater', color: '#fef9c3', icon: '📍', mainText: 'Visit our storefront to view custom showpieces and select daily individual pastry bakes.' },
@@ -10,6 +12,8 @@ const contacts = [
 ];
 
 export default function Contact() {
+  useScrollToHash();
+
   return (
     <div>
       {/* Page hero */}
@@ -32,7 +36,7 @@ export default function Contact() {
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
           {contacts.map((c, i) => (
-            <div key={i} className="flex gap-5">
+            <div key={i} id={slugify(c.title)} className="flex gap-5 scroll-mt-24">
               <div
                 className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-xl"
                 style={{ backgroundColor: c.color }}
