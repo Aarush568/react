@@ -1,11 +1,16 @@
-import React, { useState, useCallback } from 'react';
-import { BrowserRouter, Routes, Route, NavLink, Outlet } from 'react-router-dom';
+import React, { useState, useCallback, useMemo } from 'react';
+import { BrowserRouter, Routes, Route, NavLink, Link, Outlet } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
 import Reviews from './components/Reviews';
 import FAQs from './components/FAQs';
 import Contact from './components/Contact';
+import ProductPage from './components/ProductPage';
+import Cart from './components/Cart';
 import { LikedContext } from './context/LikedContext';
+import { CartContext } from './context/CartContext';
+import { parsePrice } from './utils/price';
+import { slugify } from './utils/slug';
 import Footer from './components/Footer';
 
 const navItems = [
@@ -18,6 +23,7 @@ const navItems = [
 
 function Layout() {
   const [likedIds, setLikedIds] = useState(new Set());
+  const [items, setItems] = useState([]);
 
   const toggleLiked = useCallback((id) => {
     setLikedIds(prev => {
@@ -35,8 +41,53 @@ function Layout() {
   const clearAll = useCallback(() => setLikedIds(new Set()), []);
   const likedCount = likedIds.size;
 
+  const addToCart = useCallback((cake, quantity) => {
+    const id = slugify(cake.title);
+    setItems(prev => {
+      const existing = prev.find(item => item.id === id);
+      if (existing) {
+        return prev.map(item =>
+          item.id === id ? { ...item, quantity: item.quantity + quantity } : item
+        );
+      }
+      return [
+        ...prev,
+        {
+          id,
+          title: cake.title,
+          price: cake.price,
+          unitPrice: parsePrice(cake.price),
+          image: cake.image,
+          color: cake.color,
+          quantity,
+        },
+      ];
+    });
+  }, []);
+
+  const removeFromCart = useCallback((id) => {
+    setItems(prev => prev.filter(item => item.id !== id));
+  }, []);
+
+  const updateQuantity = useCallback((id, quantity) => {
+    if (quantity < 1) {
+      setItems(prev => prev.filter(item => item.id !== id));
+      return;
+    }
+    setItems(prev => prev.map(item => (item.id === id ? { ...item, quantity } : item)));
+  }, []);
+
+  const clearCart = useCallback(() => setItems([]), []);
+
+  const cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const cartTotal = useMemo(
+    () => items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0),
+    [items]
+  );
+
   return (
     <LikedContext.Provider value={{ likedIds, toggleLiked, isLiked, clearAll }}>
+    <CartContext.Provider value={{ items, addToCart, removeFromCart, updateQuantity, clearCart, cartCount, cartTotal }}>
       <div className="min-h-screen bg-stone-50" style={{ fontFamily: "'Inter', sans-serif" }}>
 
         {/* Top navbar */}
@@ -82,19 +133,34 @@ function Layout() {
               ))}
             </nav>
 
-            {/* Saved counter */}
-            <div className="shrink-0 flex items-center gap-2 text-xs text-stone-600 bg-stone-50 border border-stone-200 px-3 py-2 rounded-lg">
-              <span>❤️</span>
-              <span className="font-bold text-amber-700">{likedCount}</span>
-              <span className="text-stone-500">saved</span>
-              {likedCount > 0 && (
-                <button
-                  onClick={clearAll}
-                  className="ml-1 text-[9px] uppercase text-stone-400 hover:text-red-400 transition-colors"
-                >
-                  clear
-                </button>
-              )}
+            {/* Saved counter + basket */}
+            <div className="shrink-0 flex items-center gap-3">
+              <div className="flex items-center gap-2 text-xs text-stone-600 bg-stone-50 border border-stone-200 px-3 py-2 rounded-lg">
+                <span>❤️</span>
+                <span className="font-bold text-amber-700">{likedCount}</span>
+                <span className="text-stone-500">saved</span>
+                {likedCount > 0 && (
+                  <button
+                    onClick={clearAll}
+                    className="ml-1 text-[9px] uppercase text-stone-400 hover:text-red-400 transition-colors"
+                  >
+                    clear
+                  </button>
+                )}
+              </div>
+
+              <Link
+                to="/cart"
+                className="relative flex items-center gap-2 text-xs text-stone-600 bg-stone-50 border border-stone-200 px-3 py-2 rounded-lg hover:border-amber-400 hover:text-amber-700 transition-colors"
+              >
+                <span>🧺</span>
+                <span className="font-medium">Basket</span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full bg-amber-700 text-white text-[10px] font-bold">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
             </div>
 
           </div>
@@ -108,6 +174,7 @@ function Layout() {
         <Footer />
 
       </div>
+    </CartContext.Provider>
     </LikedContext.Provider>
   );
 }
@@ -122,6 +189,8 @@ export default function App() {
           <Route path="reviews" element={<Reviews />} />
           <Route path="faqs" element={<FAQs />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="cake/:slug" element={<ProductPage />} />
+          <Route path="cart" element={<Cart />} />
         </Route>
       </Routes>
     </BrowserRouter>

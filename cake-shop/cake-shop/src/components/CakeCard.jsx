@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLiked } from '../context/LikedContext';
+import { slugify } from '../utils/slug';
 
 export default function CakeCard({ id, title, badge, mainText, price, color, image, actionLabel }) {
   const { toggleLiked, isLiked } = useLiked();
@@ -50,9 +52,12 @@ export default function CakeCard({ id, title, badge, mainText, price, color, ima
           <span className="font-mono text-xs font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-100">
             {price}
           </span>
-          <button className="text-[9px] uppercase tracking-wider font-extrabold text-stone-500 hover:text-amber-800 transition-colors">
+          <Link
+            to={`/cake/${slugify(title)}`}
+            className="text-[9px] uppercase tracking-wider font-extrabold text-stone-500 hover:text-amber-800 transition-colors"
+          >
             {actionLabel || 'Select'} →
-          </button>
+          </Link>
         </div>
       </div>
     </div>
