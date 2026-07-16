@@ -1,33 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 export default function Cart() {
   const { items, removeFromCart, updateQuantity, clearCart, cartTotal } = useCart();
-  const [placed, setPlaced] = useState(false);
-
-  if (placed) {
-    return (
-      <div className="max-w-2xl mx-auto px-6 py-24 text-center">
-        <span className="text-5xl block mb-4">🎂</span>
-        <h1
-          className="text-2xl font-bold text-stone-900 mb-3"
-          style={{ fontFamily: "'Playfair Display', serif" }}
-        >
-          Thank you for your order!
-        </h1>
-        <p className="text-stone-600 mb-8">
-          Your cakes are being prepared with love. A confirmation has been sent to your inbox.
-        </p>
-        <Link
-          to="/"
-          className="inline-block px-6 py-3 rounded-lg bg-amber-800 hover:bg-amber-900 text-white font-bold text-sm uppercase tracking-wide transition-colors"
-        >
-          Back to Shop
-        </Link>
-      </div>
-    );
-  }
+  const navigate = useNavigate();
 
   if (items.length === 0) {
     return (
@@ -140,13 +117,10 @@ export default function Cart() {
             <span className="font-mono">${cartTotal.toFixed(2)}</span>
           </div>
           <button
-            onClick={() => {
-              clearCart();
-              setPlaced(true);
-            }}
+            onClick={() => navigate('/checkout')}
             className="w-full px-6 py-3 rounded-lg bg-amber-800 hover:bg-amber-900 text-white font-bold text-sm uppercase tracking-wide transition-colors"
           >
-            Place Order
+            Proceed to Checkout
           </button>
         </div>
       </div>

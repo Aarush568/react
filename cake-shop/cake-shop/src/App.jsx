@@ -7,6 +7,8 @@ import FAQs from './components/FAQs';
 import Contact from './components/Contact';
 import ProductPage from './components/ProductPage';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout';
+import OrderConfirmation from './components/OrderConfirmation';
 import { LikedContext } from './context/LikedContext';
 import { CartContext } from './context/CartContext';
 import { parsePrice } from './utils/price';
@@ -95,7 +97,12 @@ function Layout() {
           <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
 
             {/* Logo */}
-            <div className="shrink-0">
+
+            <Link to="/" className="logo">
+              <img src="https://cdn.creen.ai/prod/ai_image/user/20260709234834974651.png?Expires=1784216916&OSSAccessKeyId=LTAI5t8iYqpr98kYtoS6ivdH&Signature=AzNXMkJjsMHjkZWOhcAzPhuuJcU%3D" alt="Logo" className="w-16 h-16 rounded-full object-cover" />
+            </Link>
+
+            <Link to="/" className="shrink-0">
               <h1
                 className="text-2xl font-bold tracking-wide leading-none"
                 style={{
@@ -104,14 +111,22 @@ function Layout() {
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
+                  fontSize: '1.75rem',
                 }}
               >
                 Maison du Sucre
               </h1>
-              <p className="text-[9px] tracking-widest uppercase text-stone-400 mt-0.5">
+              <p
+                className="text-[9px] tracking-widest uppercase text-stone-400 mt-0.5"
+                style={{
+                  fontSize: '0.55rem',
+                  letterSpacing: '0.15em',
+                 }}
+              >
                 Artisanal Cake Shop
+
               </p>
-            </div>
+            </Link>
 
             {/* Nav links */}
             <nav className="hidden md:flex items-center gap-7 flex-1 justify-center">
@@ -191,6 +206,8 @@ export default function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="cake/:slug" element={<ProductPage />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="order-confirmation" element={<OrderConfirmation />} />
         </Route>
       </Routes>
     </BrowserRouter>

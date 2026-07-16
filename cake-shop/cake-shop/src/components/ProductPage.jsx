@@ -32,8 +32,7 @@ export default function ProductPage() {
   };
 
   const handleBuyNow = () => {
-    addToCart(cake, quantity);
-    navigate('/cart');
+    navigate('/checkout', { state: { buyNow: { cake, quantity } } });
   };
 
   return (
