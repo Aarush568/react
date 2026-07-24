@@ -1,0 +1,124 @@
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.plan-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 34px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-card.is-featured {
+  background: var(--bg-dark);
+  border-color: var(--bg-dark);
+  color: #fff;
+  transform: scale(1.03);
+}
+
+.plan-card.is-featured h3 {
+  color: #fff;
+}
+
+.plan-card__ribbon {
+  position: absolute;
+  top: -13px;
+  left: 28px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.plan-card__tagline {
+  margin-top: 8px;
+  font-size: 14.5px;
+  color: var(--text-dim);
+}
+
+.plan-card.is-featured .plan-card__tagline {
+  color: var(--text-dim-dark);
+}
+
+.plan-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  margin: 24px 0 22px;
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--text-h);
+}
+
+.plan-card.is-featured .plan-card__price {
+  color: #fff;
+}
+
+.plan-card__currency {
+  font-size: 22px;
+  font-weight: 700;
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
+.plan-card__period {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-left: 2px;
+}
+
+.plan-card.is-featured .plan-card__period {
+  color: var(--text-dim-dark);
+}
+
+.plan-card__features {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-bottom: 28px;
+  flex: 1;
+}
+
+.plan-card__features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--text);
+}
+
+.plan-card.is-featured .plan-card__features li {
+  color: var(--text-dim-dark);
+}
+
+.plan-card__features svg {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.plan-note {
+  text-align: center;
+  margin-top: 40px;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .plan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-card.is-featured {
+    transform: none;
+    order: -1;
+  }
+}

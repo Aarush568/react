@@ -1,0 +1,46 @@
+.area-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.area-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px 26px;
+}
+
+.area-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--bg-dark);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.area-card h3 {
+  margin-bottom: 10px;
+}
+
+.area-card p {
+  color: var(--text-dim);
+  font-size: 14.5px;
+  line-height: 160%;
+}
+
+@media (max-width: 860px) {
+  .area-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .area-grid {
+    grid-template-columns: 1fr;
+  }
+}
