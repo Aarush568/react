@@ -17,6 +17,7 @@ function Header() {
   return (
     <header className="site-header">
       <div className="container site-header__bar">
+        <img src="https://cdn.creen.ai/prod/ai_image/user/20260725014857349043.png?Expires=1785520194&OSSAccessKeyId=LTAI5t8iYqpr98kYtoS6ivdH&Signature=r3GMheoYOWFX%2Bpm7MpJt%2B%2Fdo7G8%3D" alt="Logo" className="logo" height="40" width="65" margin-right="0.1rem" />
         <NavLink to="/" className="logo" onClick={() => setMenuOpen(false)}>
           PULSE<span>FIT</span>
         </NavLink>
