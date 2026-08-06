@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { AppDataProvider } from './context/AppDataContext'
 import Layout from './components/Layout'
 import Home from './components/Home'
 import TrainingAreas from './components/TrainingAreas'
@@ -19,18 +20,20 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/training-areas" element={<TrainingAreas />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/membership" element={<Membership />} />
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AppDataProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/training-areas" element={<TrainingAreas />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/membership" element={<Membership />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AppDataProvider>
   )
 }
 

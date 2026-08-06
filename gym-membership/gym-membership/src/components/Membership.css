@@ -38,6 +38,15 @@
   border-radius: 999px;
 }
 
+.plan-card__ribbon--active {
+  background: var(--bg-dark);
+}
+
+.plan-card.is-featured .plan-card__ribbon--active {
+  background: #fff;
+  color: var(--bg-dark);
+}
+
 .plan-card__tagline {
   margin-top: 8px;
   font-size: 14.5px;
