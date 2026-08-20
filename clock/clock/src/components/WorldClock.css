@@ -1,0 +1,110 @@
+.worldclock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.worldclock-toolbar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.worldclock-toolbar select {
+  flex: 1 1 260px;
+  max-width: 320px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  font-size: 15px;
+}
+
+.worldclock-toolbar button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.worldclock-toolbar button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.worldclock-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.clock-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: left;
+  background: var(--code-bg);
+  position: relative;
+}
+
+.clock-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.clock-card-head h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.badge {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.clock-card .remove {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.clock-card .remove:hover {
+  color: var(--accent);
+}
+
+.clock-card-time {
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--text-h);
+  margin-top: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-card-meta {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.empty-hint {
+  grid-column: 1 / -1;
+  color: var(--text);
+}

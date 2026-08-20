@@ -1,0 +1,86 @@
+.stopwatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.stopwatch-display {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-h);
+}
+
+.stopwatch-main {
+  font-size: 64px;
+  font-weight: 200;
+}
+
+.stopwatch-centis {
+  font-size: 28px;
+  font-weight: 200;
+  color: var(--text);
+}
+
+.stopwatch-controls {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.stopwatch-controls button {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--code-bg);
+  color: var(--text-h);
+}
+
+.stopwatch-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stopwatch-controls button.start {
+  background: rgba(52, 199, 89, 0.15);
+  color: #2fa84f;
+  border-color: rgba(52, 199, 89, 0.4);
+}
+
+.stopwatch-controls button.stop {
+  background: rgba(255, 59, 48, 0.15);
+  color: #e0332a;
+  border-color: rgba(255, 59, 48, 0.4);
+}
+
+.lap-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border-top: 1px solid var(--border);
+}
+
+.lap-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.lap-list li.fastest {
+  color: #2fa84f;
+}
+
+.lap-list li.slowest {
+  color: #e0332a;
+}
