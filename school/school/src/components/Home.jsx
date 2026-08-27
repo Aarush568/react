@@ -18,7 +18,7 @@ function Home() {
       </div>
       <div className="container hero__inner">
         <div className="hero__content">
-          <span className="eyebrow">Est. 1987 · Grades K–12</span>
+          <span className="eyebrow">Est. 1987 · Grades K-12</span>
           <h1>Empowering Minds, Building Futures</h1>
           <p className="hero__lede">
             Northbridge Academy is a nationally recognized K&ndash;12 institution
