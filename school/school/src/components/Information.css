@@ -1,0 +1,133 @@
+.about__mission {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+.about__mission-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--navy-700);
+  border-radius: 10px;
+  padding: 32px;
+}
+
+.about__mission-card h3 {
+  color: var(--navy-800);
+  margin-bottom: 12px;
+}
+
+.about__mission-card p {
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  padding: 30px 26px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.feature-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: var(--navy-500);
+}
+
+.feature-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 9px;
+  background: var(--navy-800);
+  color: var(--white);
+  margin-bottom: 18px;
+}
+
+.feature-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.feature-card h3 {
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.facilities {
+  margin-top: 64px;
+  background: var(--navy-900);
+  border-radius: 14px;
+  padding: 44px 48px;
+}
+
+.facilities__title {
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.facilities__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 32px;
+}
+
+.facilities__list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.facilities__list svg {
+  width: 18px;
+  height: 18px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .about__mission {
+    grid-template-columns: 1fr;
+  }
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .facilities {
+    padding: 36px 28px;
+  }
+  .facilities__list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+  .facilities__list {
+    grid-template-columns: 1fr;
+  }
+}
