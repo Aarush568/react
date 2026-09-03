@@ -1,20 +1,58 @@
+import { Link } from 'react-router-dom'
 import './Home.css'
 
 const STATS = [
-  { value: '1,200+', label: 'Students Enrolled' },
-  { value: '12:1', label: 'Student–Teacher Ratio' },
-  { value: '35+', label: 'Years of Excellence' },
-  { value: '98%', label: 'University Acceptance' },
+  {
+    value: '1,200+',
+    label: 'Students Enrolled',
+    icon: 'https://img.icons8.com/ios-filled/100/123869/graduation-cap.png',
+  },
+  {
+    value: '12:1',
+    label: 'Student–Teacher Ratio',
+    icon: 'https://img.icons8.com/ios-filled/100/123869/student-male.png',
+  },
+  {
+    value: '35+',
+    label: 'Years of Excellence',
+    icon: 'https://img.icons8.com/ios-filled/100/123869/prize.png',
+  },
+  {
+    value: '98%',
+    label: 'University Acceptance',
+    icon: 'https://img.icons8.com/ios-filled/100/123869/university.png',
+  },
+]
+
+const GALLERY_IMAGES = [
+  {
+    src: 'https://t4.ftcdn.net/jpg/15/12/04/11/360_F_1512041110_c0NFJDcHLmUJiwfDowzcKUgsPALmbjdD.jpg',
+    alt: 'Students collaborating at Northbridge Academy',
+  },
+  {
+    src: 'https://felton.net.au/wp-content/uploads/2025/09/Blog_1000x664px-1.jpg',
+    alt: 'Northbridge Academy campus life',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Nob29sJTIwY2xhc3Nyb29tfGVufDB8fDB8fHww',
+    alt: 'A Northbridge Academy classroom',
+  },
+  {
+    src: 'https://evolveltd.eu/wp-content/uploads/2020/01/255376950_439497967739323_1355680417886447892_n-1.jpg',
+    alt: 'Northbridge Academy students at work',
+  },
 ]
 
 function Home() {
   return (
     <section id="home" className="hero">
-      <div className="image-container">
-        <img src="https://t4.ftcdn.net/jpg/15/12/04/11/360_F_1512041110_c0NFJDcHLmUJiwfDowzcKUgsPALmbjdD.jpg" alt="Northbridge Academy"/>
-        <img src="https://felton.net.au/wp-content/uploads/2025/09/Blog_1000x664px-1.jpg" alt="Northbridge Academy"/>
-        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Nob29sJTIwY2xhc3Nyb29tfGVufDB8fDB8fHww" alt="Northbridge Academy"/>
-        <img src="https://evolveltd.eu/wp-content/uploads/2020/01/255376950_439497967739323_1355680417886447892_n-1.jpg" alt="Northbridge Academy"/>
+      <div className="hero__bg" aria-hidden="true" />
+      <div className="container hero__gallery">
+        {GALLERY_IMAGES.map((image, index) => (
+          <div className="hero__gallery-item" key={image.src}>
+            <img src={image.src} alt={image.alt} loading={index === 0 ? 'eager' : 'lazy'} />
+          </div>
+        ))}
       </div>
       <div className="container hero__inner">
         <div className="hero__content">
@@ -27,19 +65,22 @@ function Home() {
             community that prepares every student for what comes next.
           </p>
           <div className="hero__actions">
-            <a className="btn btn-primary" href="#admissions">
+            <Link className="btn btn-primary" to="/admissions">
               Apply for Admission
-            </a>
-            <a className="btn btn-secondary" href="#academics">
+            </Link>
+            <Link className="btn btn-secondary" to="/academics">
               Explore Academics
-            </a>
+            </Link>
           </div>
 
           <dl className="hero__stats">
             {STATS.map((stat) => (
               <div className="hero__stat" key={stat.label}>
-                <dt>{stat.value}</dt>
-                <dd>{stat.label}</dd>
+                <img className="hero__stat-icon" src={stat.icon} alt="" aria-hidden="true" />
+                <div>
+                  <dt>{stat.value}</dt>
+                  <dd>{stat.label}</dd>
+                </div>
               </div>
             ))}
           </dl>
@@ -68,12 +109,18 @@ function Home() {
           </div>
 
           <div className="hero__float hero__float--top">
-            <strong>#1</strong>
-            <span>Ranked Regional Academy</span>
+            <img src="https://img.icons8.com/ios-filled/100/c9a24b/trophy.png" alt="" aria-hidden="true" />
+            <div>
+              <strong>#1</strong>
+              <span>Ranked Regional Academy</span>
+            </div>
           </div>
           <div className="hero__float hero__float--bottom">
-            <strong>40+</strong>
-            <span>Clubs &amp; Activities</span>
+            <img src="https://img.icons8.com/ios-filled/100/123869/collaboration.png" alt="" aria-hidden="true" />
+            <div>
+              <strong>40+</strong>
+              <span>Clubs &amp; Activities</span>
+            </div>
           </div>
         </div>
       </div>

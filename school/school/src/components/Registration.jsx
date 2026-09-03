@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Registration.css'
 
 const STEPS = [
@@ -25,7 +26,7 @@ const INITIAL_FORM = {
 
 function Registration() {
   const [form, setForm] = useState(INITIAL_FORM)
-  const [submitted, setSubmitted] = useState(false)
+  const navigate = useNavigate()
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -34,7 +35,7 @@ function Registration() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setSubmitted(true)
+    navigate('/thank-you', { state: { parentName: form.parentName } })
   }
 
   return (
@@ -62,31 +63,7 @@ function Registration() {
 
         <div className="admissions__layout">
           <div className="admissions__form-card">
-            {submitted ? (
-              <div className="form-success">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="m8 12.5 2.5 2.5 5.5-6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <h3>Inquiry Received</h3>
-                <p>
-                  Thank you, {form.parentName || 'there'}. Our admissions team
-                  will reach out within two business days to schedule a
-                  campus tour and discuss next steps.
-                </p>
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => {
-                    setForm(INITIAL_FORM)
-                    setSubmitted(false)
-                  }}
-                >
-                  Submit Another Inquiry
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <h3 className="admissions__form-title">Request Admissions Information</h3>
                 <div className="form-grid">
                   <label className="form-field">
@@ -170,8 +147,7 @@ function Registration() {
                 <button type="submit" className="btn btn-primary btn-block">
                   Submit Inquiry
                 </button>
-              </form>
-            )}
+            </form>
           </div>
 
           <aside className="admissions__info">

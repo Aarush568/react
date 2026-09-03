@@ -1,17 +1,23 @@
 import { useState } from 'react'
+import { Routes, Route, Link, NavLink } from 'react-router-dom'
 import Home from './components/Home'
 import Information from './components/Information'
 import Courses from './components/Courses'
 import CurrentNews from './components/CurrentNews'
+import NewsArticle from './components/NewsArticle'
+import Calendar from './components/Calendar'
 import Registration from './components/Registration'
+import ThankYou from './components/ThankYou'
+import LegalPlaceholder from './components/LegalPlaceholder'
+import { SOCIAL_LINKS } from './config/siteLinks'
 import './App.css'
 
 const NAV_LINKS = [
-  { href: '#home', label: 'Home' },
-  { href: '#about', label: 'About' },
-  { href: '#academics', label: 'Academics' },
-  { href: '#news', label: 'News' },
-  { href: '#admissions', label: 'Admissions' },
+  { to: '/', label: 'Home' },
+  { to: '/about', label: 'About' },
+  { to: '/academics', label: 'Academics' },
+  { to: '/news', label: 'News' },
+  { to: '/admissions', label: 'Admissions' },
 ]
 
 function App() {
@@ -21,28 +27,28 @@ function App() {
     <>
       <header className="navbar">
         <div className="container navbar__inner">
-          <a className="brand" href="#home" onClick={() => setMenuOpen(false)}>
+          <Link className="brand" to="/" onClick={() => setMenuOpen(false)}>
             <span className="brand__mark">NA</span>
             <span className="brand__text">
               <span className="brand__name">Northbridge Academy</span>
               <span className="brand__tag">Est. 1987</span>
             </span>
-          </a>
+          </Link>
 
           <ul className={`nav-links ${menuOpen ? 'is-open' : ''}`}>
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a href={link.href} onClick={() => setMenuOpen(false)}>
+              <li key={link.to}>
+                <NavLink to={link.to} end={link.to === '/'} onClick={() => setMenuOpen(false)}>
                   {link.label}
-                </a>
+                </NavLink>
               </li>
             ))}
           </ul>
 
           <div className="navbar__actions">
-            <a className="btn btn-primary" href="#admissions">
+            <Link className="btn btn-primary" to="/admissions">
               Apply Now
-            </a>
+            </Link>
             <button
               type="button"
               className="nav-toggle"
@@ -63,11 +69,18 @@ function App() {
       </header>
 
       <main>
-        <Home />
-        <Information />
-        <Courses />
-        <CurrentNews />
-        <Registration />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<Information />} />
+          <Route path="/academics" element={<Courses />} />
+          <Route path="/news" element={<CurrentNews />} />
+          <Route path="/news/:slug" element={<NewsArticle />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/admissions" element={<Registration />} />
+          <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/privacy-policy" element={<LegalPlaceholder title="Privacy Policy" />} />
+          <Route path="/terms-of-use" element={<LegalPlaceholder title="Terms of Use" />} />
+        </Routes>
       </main>
 
       <footer className="footer">
@@ -86,24 +99,24 @@ function App() {
               learning in a supportive, inclusive community.
             </p>
             <div className="footer__social">
-              <a href="#" aria-label="Facebook">
+              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.06 5.66 21.2 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.44 2.91h-2.34V22C18.34 21.2 22 17.06 22 12.06Z" />
                 </svg>
               </a>
-              <a href="#" aria-label="Instagram">
+              <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <rect x="3" y="3" width="18" height="18" rx="5" />
                   <circle cx="12" cy="12" r="4" />
                   <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
                 </svg>
               </a>
-              <a href="#" aria-label="X">
+              <a href={SOCIAL_LINKS.twitter} target="_blank" rel="noopener noreferrer" aria-label="X">
                 <svg width="14" height="14" viewBox="0 0 19 19" fill="currentColor">
                   <path d="M1.893 1.98c.052.072 1.245 1.769 2.653 3.77l2.892 4.114c.183.261.333.48.333.486s-.068.089-.152.183l-.522.593-.765.867-3.597 4.087c-.375.426-.734.834-.798.905a1 1 0 0 0-.118.148c0 .01.236.017.664.017h.663l.729-.83c.4-.457.796-.906.879-.999a692 692 0 0 0 1.794-2.038c.034-.037.301-.34.594-.675l.551-.624.345-.392a7 7 0 0 1 .34-.374c.006 0 .93 1.306 2.052 2.903l2.084 2.965.045.063h2.275c1.87 0 2.273-.003 2.266-.021-.008-.02-1.098-1.572-3.894-5.547-2.013-2.862-2.28-3.246-2.273-3.266.008-.019.282-.332 2.085-2.38l2-2.274 1.567-1.782c.022-.028-.016-.03-.65-.03h-.674l-.3.342a871 871 0 0 1-1.782 2.025c-.067.075-.405.458-.75.852a100 100 0 0 1-.803.91c-.148.172-.299.344-.99 1.127-.304.343-.32.358-.345.327-.015-.019-.904-1.282-1.976-2.808L6.365 1.85H1.8Z" />
                 </svg>
               </a>
-              <a href="#" aria-label="YouTube">
+              <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81ZM9.6 15.6V8.4l6.4 3.6Z" />
                 </svg>
@@ -114,22 +127,22 @@ function App() {
           <nav>
             <h4>Quick Links</h4>
             <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#academics">Academics</a></li>
-              <li><a href="#news">News &amp; Events</a></li>
-              <li><a href="#admissions">Admissions</a></li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/academics">Academics</Link></li>
+              <li><Link to="/news">News &amp; Events</Link></li>
+              <li><Link to="/admissions">Admissions</Link></li>
             </ul>
           </nav>
 
           <nav>
             <h4>Programs</h4>
             <ul>
-              <li><a href="#academics">Primary School</a></li>
-              <li><a href="#academics">Middle School</a></li>
-              <li><a href="#academics">High School</a></li>
-              <li><a href="#academics">STEM &amp; Robotics</a></li>
-              <li><a href="#academics">Arts &amp; Athletics</a></li>
+              <li><Link to="/academics">Primary School</Link></li>
+              <li><Link to="/academics">Middle School</Link></li>
+              <li><Link to="/academics">High School</Link></li>
+              <li><Link to="/academics">STEM &amp; Robotics</Link></li>
+              <li><Link to="/academics">Arts &amp; Athletics</Link></li>
             </ul>
           </nav>
 
@@ -155,8 +168,8 @@ function App() {
         <div className="container footer__bottom">
           <p>&copy; {new Date().getFullYear()} Northbridge Academy. All rights reserved.</p>
           <ul className="footer__bottom-links">
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Use</a></li>
+            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link to="/terms-of-use">Terms of Use</Link></li>
           </ul>
         </div>
       </footer>

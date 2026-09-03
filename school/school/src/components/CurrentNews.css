@@ -58,7 +58,14 @@
   font-size: 14.5px;
   color: var(--muted);
   line-height: 1.65;
+}
+
+.news-card p:last-of-type {
   flex-grow: 1;
+}
+
+.news-card p + p {
+  margin-top: 14px;
 }
 
 .news-card__link {

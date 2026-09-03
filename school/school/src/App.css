@@ -79,6 +79,10 @@
   color: var(--navy-700);
 }
 
+.nav-links a.active {
+  color: var(--navy-800);
+}
+
 .navbar__actions {
   display: flex;
   align-items: center;
