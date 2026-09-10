@@ -1,0 +1,138 @@
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.benefits-list {
+  display: grid;
+  gap: 14px;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.94rem;
+}
+
+.benefits-list svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.program-level {
+  margin-bottom: 48px;
+}
+
+.program-level:last-child {
+  margin-bottom: 0;
+}
+
+.program-level-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.program-level-head h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.program-card {
+  padding: 24px;
+}
+
+.program-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.program-card-head h4 {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1.02rem;
+  color: var(--primary-darker);
+  font-weight: 700;
+}
+
+.program-card p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.step-card {
+  position: relative;
+  padding: 28px 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-family: var(--serif);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.step-card h3 {
+  font-size: 1.02rem;
+  margin: 0 0 8px;
+}
+
+.step-card p {
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .program-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .program-grid,
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
