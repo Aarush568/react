@@ -84,7 +84,9 @@ function Home() {
                 <span>Always open, always ready</span>
               </div>
             </div>
-            <div className="hero-graphic" />
+            <div className="hero-graphic">
+              <img class="hero-image" src="https://upload.wikimedia.org/wikipedia/commons/8/88/Hospital-de-Bellvitge.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original" alt="Lindenpark Hospital exterior view" />
+            </div>
           </div>
         </div>
       </section>
@@ -106,7 +108,9 @@ function Home() {
       <section className="section intro">
         <div className="container intro-grid">
           <div className="intro-visual" aria-hidden="true">
-            <div className="intro-visual-block" />
+            <div className="intro-visual-block">
+              <img class="intro-image" src="https://cdn.ca.emap.com/wp-content/uploads/sites/8/2026/01/Reds10-NHP-Prototype-credit-Steph-Simmons-Photos.webp" alt="Lindenpark Hospital interior view"/>
+            </div>
           </div>
           <div className="intro-copy">
             <span className="eyebrow">Welcome to Lindenpark</span>
